@@ -112,7 +112,7 @@
     <div id="ok" style="cursor:default;display:none;z-index:3;color:white;background:#31AE33;position:fixed;left:0;top:0;width:100%;height:100%;text-align:center;justify-content: center;align-items: center;">
         <div> <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                 <path d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z" />
-            </svg> <button id="btn_again">Play again?</button> </div>
+            </svg> <button id="btn_again">Complete</button> </div>
     </div> <audio id="sound_music" loop>
         <source src="static/sound/music2.mp3" type="audio/mp3">
     </audio> <audio id="sound_shoot">
@@ -162,23 +162,23 @@
             flash = true;
             if (!idkfa) {
                 playSound('shoot');
-                document.querySelector('#gun').css('background', 'rgba(0, 0, 0, 0) url("static/pistol-flash.png") no-repeat scroll left bottom');
-                document.querySelector('#gun').css('left',"-=22");
+                $('#gun').css('background', 'rgba(0, 0, 0, 0) url("static/pistol-flash.png") no-repeat scroll left bottom');
+                $('#gun').css('left',"-=22");
             } else {
                 playSound('shootshotgun');
-                document.querySelector('#gun').css('background', 'rgba(0, 0, 0, 0) url("static/shotgun-flash.png") no-repeat scroll left bottom');
-                //document.querySelector('#gun').css('left',"-=33");
-                document.querySelector('#gun').css('bottom',"0px");
+                $('#gun').css('background', 'rgba(0, 0, 0, 0) url("static/shotgun-flash.png") no-repeat scroll left bottom');
+                //$('#gun').css('left',"-=33");
+                $('#gun').css('bottom',"0px");
             }
             setTimeout(function() {
                 flash = false;
                 if (!idkfa) {
-                    document.querySelector('#gun').css('background', 'rgba(0, 0, 0, 0) url("static/pisga0.png") no-repeat scroll left bottom');
-                    document.querySelector('#gun').css('left',"+=22");
+                    $('#gun').css('background', 'rgba(0, 0, 0, 0) url("static/pisga0.png") no-repeat scroll left bottom');
+                    $('#gun').css('left',"+=22");
                 } else {
-                    document.querySelector('#gun').css('background', 'rgba(0, 0, 0, 0) url("static/sht2a0.png") no-repeat scroll left bottom');
-                    //document.querySelector('#gun').css('left',"+=33");
-                    document.querySelector('#gun').css('bottom',"-10px");
+                    $('#gun').css('background', 'rgba(0, 0, 0, 0) url("static/sht2a0.png") no-repeat scroll left bottom');
+                    //$('#gun').css('left',"+=33");
+                    $('#gun').css('bottom',"-10px");
                 }
             }, 200);
         }
@@ -192,23 +192,23 @@
             handleShootAnim();
         }
         
-        document.querySelector('.enemy').click(function() {
+        $('.enemy').click(function() {
             if (!is_shoot) {
                 is_shoot = true;
         
                 handleShootAnim();
         
                 if (sound_on) {
-                    document.querySelector('#sound_death').attr("src", "static/sound/" + id_enemy + "_kill.wav");
-                    document.querySelector('#sound_death')[0].play();
+                    $('#sound_death').attr("src", "static/sound/" + id_enemy + "_kill.wav");
+                    $('#sound_death')[0].play();
                 }
-                document.querySelector('.enemy').css('background-image', "url('static/enemies/" + id_enemy + "_dead.png')");
+                $('.enemy').css('background-image', "url('static/enemies/" + id_enemy + "_dead.png')");
                 
         
                 total_kills++;
         
                 setTimeout(function() {
-                    document.querySelector('.enemy').fadeOut('fast', function() {
+                    $('.enemy').fadeOut('fast', function() {
         
                         setTimeout(function() {
                             if (total_kills != max_kills) {
@@ -229,12 +229,12 @@
         });
         
         function endGame() {
-            document.querySelector('#start').hide();
-            document.querySelector('#ok').css('display', 'flex');
+            $('#start').hide();
+            $('#ok').css('display', 'flex');
             playSound('ok');
-            document.querySelector('#sound_music')[0].pause();
+            $('#sound_music')[0].pause();
             postSize(1);
-            document.querySelector('#cheatcode').css('opacity',0);
+            $('#cheatcode').css('opacity',0);
             if (timer_game) {
                 clearTimeout(timer_game);
             }
@@ -256,7 +256,7 @@
         
         function showEnemy() {
             id_enemy = randomNumber(1, total_enemies);
-            document.querySelector('.enemy').css('background-image', "url('static/enemies/" + id_enemy + "_normal.png')").css('left', randomNumber(0, screen_width-enemy_width)).show();
+            $('.enemy').css('background-image', "url('static/enemies/" + id_enemy + "_normal.png')").css('left', randomNumber(0, screen_width-enemy_width)).show();
         }
         
         function postSize(height) {
@@ -266,97 +266,97 @@
         }
         
         function startGame() {
-            document.querySelector('#cheatcode').show().val('').focus();
+            $('#cheatcode').show().val('').focus();
         
             showEnemy();
             setRandomBackground();
         
             if (countdown) {
-                document.querySelector('#countdown').show();
+                $('#countdown').show();
         
                 timer_game = setInterval(function() {
                     current_time -= 0.125;
         
                     if (current_time <= 0 && total_kills != max_kills) {
-                        document.querySelector('#gameover').css('display','flex');
+                        $('#gameover').css('display','flex');
         
                         clearInterval(timer_game);
                     } else {
                         time_percent = parseInt((current_time * 100) / time_seconds);
         
-                        document.querySelector('#percent').css('width', time_percent + '%');
+                        $('#percent').css('width', time_percent + '%');
                     }
                 }, 125);
             }
         }
         
-        document.querySelector('#btn_start').click(function() {
-            document.querySelector('#start').hide();
+        $('#btn_start').click(function() {
+            $('#start').hide();
             sound_on = true;
             playSound('music');
             startGame();
         });
         
-        document.querySelector('#btn_start_mute').click(function() {
-            document.querySelector('#start').hide();
+        $('#btn_start_mute').click(function() {
+            $('#start').hide();
             sound_on = false;
             startGame();
         });
         
-        document.querySelector('#btn_again').click(function() {
-            document.querySelector('#ok').hide();
+        /*$('#btn_again').click(function() {
+            $('#ok').hide();
             if (sound_on) {
                 playSound('music');
             }
-            document.querySelector('#gameover').click();
-        });
+            $('#gameover').click();
+        });*/
         
         
-        document.querySelector('#gameover').click(function() {
+        $('#gameover').click(function() {
             current_time = time_seconds;
-            document.querySelector(this).hide();
-            document.querySelector('#percent').css('width', '100%');
+            $(this).hide();
+            $('#percent').css('width', '100%');
             total_kills = 0;
             startGame();
         });
         
         function playSound(id) {
             if (sound_on) {
-                document.querySelector('#sound_' + id)[0].currentTime = 0;
-                document.querySelector('#sound_' + id)[0].play();
+                $('#sound_' + id)[0].currentTime = 0;
+                $('#sound_' + id)[0].play();
             }
         }
         
-        document.querySelector(window).resize(function() {
-            screen_width = document.querySelector(window).width();
-            screen_height = document.querySelector(window).height();
+        $(window).resize(function() {
+            screen_width = $(window).width();
+            screen_height = $(window).height();
         });
         
-        document.querySelector(window).resize();
+        $(window).resize();
         
-        document.querySelector('#cheatcode').keyup(function() {
-            if (document.querySelector(this).css('opacity', 1).val().toUpperCase() == 'IDDQD') {
-                document.querySelector('#cheatcode').val('').hide();
-                document.querySelector('#gameover').hide();
+        $('#cheatcode').keyup(function() {
+            if ($(this).css('opacity', 1).val().toUpperCase() == 'IDDQD') {
+                $('#cheatcode').val('').hide();
+                $('#gameover').hide();
                 endGame();
             }
-            if (document.querySelector(this).css('opacity', 1).val().toUpperCase() == 'IDKFA') {
+            if ($(this).css('opacity', 1).val().toUpperCase() == 'IDKFA') {
                 idkfa = true;
                 document.getElementById("gun").style.backgroundImage='url("static/sht2a0.png"';
-                document.querySelector('#cheatcode').val('').hide();
+                $('#cheatcode').val('').hide();
             }
         });
         
         function setRandomBackground(){
-            document.querySelector('body').css('background-image', "url('static/backgrounds/" + randomNumber(1, total_backgrounds) + ".png')" );
+            $('body').css('background-image', "url('static/backgrounds/" + randomNumber(1, total_backgrounds) + ".png')" );
         }
         
-        document.querySelector(function() {
-            document.querySelector('#sound_shoot')[0].volume = 0.3;
-            document.querySelector('#sound_music')[0].volume = 0.3;
-            document.querySelector('#sound_ok')[0].volume = 0.3;
-            document.querySelector('#max_kills').html(max_kills);
-            document.querySelector('.enemy').css('width',enemy_width).css('height',enemy_height);
+        $(function() {
+            $('#sound_shoot')[0].volume = 0.3;
+            $('#sound_music')[0].volume = 0.3;
+            $('#sound_ok')[0].volume = 0.3;
+            $('#max_kills').html(max_kills);
+            $('.enemy').css('width',enemy_width).css('height',enemy_height);
         
         
             for (var i = 1; i <= total_backgrounds; i++) {
@@ -383,12 +383,12 @@
         
             if (!idkfa) {
                 if (!flash) {
-                    document.querySelector('#gun').css('left', (x-34)+"px");
+                    $('#gun').css('left', (x-34)+"px");
                 } else {
-                    document.querySelector('#gun').css('left', (x-56)+"px");
+                    $('#gun').css('left', (x-56)+"px");
                 }
             } else {
-                document.querySelector('#gun').css('left', (x-33)+"px");
+                $('#gun').css('left', (x-33)+"px");
             }
         });
     </script>
