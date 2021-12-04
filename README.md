@@ -1,7 +1,3 @@
-# DOOM Captcha
+# 99captcha
 
-[DEMO](https://vivirenremoto.github.io/doomcaptcha/)
-
-[Author](https://twitter.com/vivirenremoto)
-
-![DOOM Captcha](https://vivirenremoto.github.io/doomcaptcha/static/social.jpg)
+Funny captcha for Windows99. Based on vivirenremoto's doomcaptcha :D
