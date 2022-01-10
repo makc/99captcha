@@ -1,3 +1,3 @@
 # 99captcha
 
-Funny captcha for Windows99. Based on vivirenremoto's doomcaptcha :D
+Funny captcha for open99. Based on vivirenremoto's doomcaptcha
