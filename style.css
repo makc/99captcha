@@ -53,3 +53,7 @@ textarea {
     right: 10px;
     top: 10px;
 }
+tr {
+    border-width: 5px;
+    border-color: black;
+}
